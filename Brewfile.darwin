@@ -1,0 +1,11 @@
+# Command-line interface for 1Password
+cask "1password-cli"
+cask "font-hack-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Customise mouse behavior
+cask "linearmouse"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"
+# CLI to create, run, and deploy Slack apps
+cask "slack-cli"

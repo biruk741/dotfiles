@@ -1,0 +1,30 @@
+font-family = JetBrainsMono Nerd Font Mono
+font-style = Regular
+font-size = 14
+font-thicken = true
+theme = rose-pine
+
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = false
+
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+
+# Native Ghostty tab/window controls
+keybind = super+t=new_tab
+keybind = super+w=close_surface
+keybind = super+shift+left=previous_tab
+keybind = super+shift+right=next_tab
+
+# Direct tab access
+keybind = super+one=goto_tab:1
+keybind = super+two=goto_tab:2
+keybind = super+three=goto_tab:3
+keybind = super+four=goto_tab:4
+keybind = super+five=goto_tab:5
+keybind = super+six=goto_tab:6
+keybind = super+seven=goto_tab:7
+keybind = super+eight=goto_tab:8
+keybind = super+nine=goto_tab:9
+keybind = shift+enter=text:\x1b\r

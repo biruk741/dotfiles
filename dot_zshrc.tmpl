@@ -1,0 +1,383 @@
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+#Fig pre block. Keep at the top of this file.
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+export GITLAB_TOKEN="{{ onepasswordRead "op://Personal/GitLab Token/token" }}"
+export GITLAB_TOKEN_MCP="{{ onepasswordRead "op://Personal/GitLab Token MCP/token" }}"
+export GITLAB_API_URL="https://gitlab.sezzle.com/api/v4"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="refined-catppuccin"
+
+GOPATH="/Users/biruk.mengistu/go"
+
+# In your .zshrc or .bashrc
+alias grep='rg --no-ignore --hidden --follow --color=auto --no-heading'
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git you-should-use zsh-bat)
+
+source $ZSH/oh-my-zsh.sh
+
+unset LS_COLORS
+unset EXA_COLORS
+export EZA_CONFIG_DIR="$HOME/.config/eza"
+export COLORTERM=truecolor
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "mafredri/zsh-async", from:github
+zplug load
+
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export NVM_DIR="$HOME/.nvm"
+
+_nvm_lazy_load() {
+  unset -f nvm node npm npx
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
+nvm() { _nvm_lazy_load; nvm "$@"; }
+node() { _nvm_lazy_load; node "$@"; }
+npm() { _nvm_lazy_load; npm "$@"; }
+npx() { _nvm_lazy_load; npx "$@"; }
+
+alias mysql="/opt/homebrew/opt/mysql@5.7/bin/mysql"
+alias sezzle="cd /Users/biruk.mengistu/go/src/sezzle/sezzle-compose && docker compose up -d"
+alias gchkt="$GOPATH/bin/gchkt /Users/biruk.mengistu/go/src/sezzle/lazy-checkout-gen/config"
+alias watch="../sezzle-compose/scripts/localko.sh"
+export NPM_TOKEN="{{ onepasswordRead "op://Personal/NPM Token/token" }}"
+export ACCERTIFY_NPM_TOKEN="{{ onepasswordRead "op://Personal/Accertify NPM Token/token" }}"
+export NIFT_NPM_TOKEN="{{ onepasswordRead "op://Personal/Nift NPM Token/token" }}"
+export NIFT_GITHUB_TOKEN="{{ onepasswordRead "op://Personal/Nift GitHub Token/token" }}"
+export GOPRIVATE="gitlab.sezzle.com"
+
+alias rebuild="../sezzle-compose/scripts/localko_build.sh"
+alias cat="bat"
+alias rcat="cat"alias mobile-error-count="yarn type-check-limit"
+rbenv() {
+  unset -f rbenv
+  eval "$(command rbenv init -)"
+  rbenv "$@"
+}
+alias psql='/Library/PostgreSQL/17/bin/psql'
+
+# bun completions
+[ -s "/Users/biruk.mengistu/.bun/_bun" ] && source "/Users/biruk.mengistu/.bun/_bun"
+
+if type fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob \"!.git/*\" --glob \"!node_modules/*\""
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview \"bat -n --color=always --line-range :100 {}\""
+alias ls="eza --color=always --long --git --icons=always --no-time --no-permissions --git-repos --group-directories-first --header"
+alias wh="week-highlights"
+export OPENAIAPIKEY="{{ onepasswordRead "op://Personal/OpenAI API Key/token" }}"
+alias commit="committer"
+export TEMPO_API_KEY="{{ onepasswordRead "op://Personal/Tempo API Key/token" }}"
+export JIRA_TOKEN="{{ onepasswordRead "op://Personal/Jira Token/token" }}"
+alias friday="~/Documents/friday"
+alias restore='f(){ git restore --source "$1" --worktree "$2"; }; f'
+export GPG_TTY=$(tty)
+alias menetsir="~/Downloads/menetsir"
+
+
+delete() {
+  # If no args, mimic rm's "missing operand"
+  if [ "$#" -eq 0 ]; then
+    echo "delete: missing operand"
+    echo "usage: delete [FILE]..."
+    return 1
+  fi
+
+  # Decide on a trash directory
+  # macOS: Finder Trash
+  # Linux: freedesktop-style Trash
+  local trash_dir
+  if [[ "$OSTYPE" == darwin* ]]; then
+    trash_dir="$HOME/.Trash"
+  else
+    trash_dir="${XDG_DATA_HOME:-$HOME/.local/share}/Trash/files"
+  fi
+
+  mkdir -p "$trash_dir" || {
+    echo "delete: failed to create trash directory: $trash_dir"
+    return 1
+  }
+
+  # Collect non-flag arguments as targets
+  # We ignore -r, -f, -rf, -fr since we behave as -rf by default
+  local targets=()
+  local arg
+  for arg in "$@"; do
+    case "$arg" in
+      -r|-f|-rf|-fr)
+        # ignore, we are already recursive & forceful
+        ;;
+      *)
+        targets+=("$arg")
+        ;;
+    esac
+  done
+
+  if [ "${#targets[@]}" -eq 0 ]; then
+    echo "delete: nothing to delete"
+    return 0
+  fi
+
+  # For each target: move instantly, then delete in background
+  local target stamp dest
+  for target in "${targets[@]}"; do
+    if [ ! -e "$target" ]; then
+      echo "delete: cannot remove '$target': No such file or directory"
+      continue
+    fi
+
+    stamp="$(date +%s)-$RANDOM"
+    dest="$trash_dir/$(basename "$target")-$stamp"
+
+    if mv -- "$target" "$dest"; then
+      echo "delete: '$target' moved to trash (background delete started)"
+      rm -rf -- "$dest" >/dev/null 2>&1 &
+      disown 2>/dev/null || true
+    else
+      echo "trashrm: failed to move '$target'"
+    fi
+  done
+}
+
+nuke() {
+    echo "🚀 Starting nuclear reset..."
+
+    # 1. Kill existing processes
+    killall -9 node 2>/dev/null
+    killall -9 Xcode 2>/dev/null
+
+    # 2. Fast Delete with Null Glob (N)
+    delete node_modules ios/Pods ~/Library/Developer/Xcode/DerivedData/sezzlemobile-*(N)
+
+    echo "📦 Reinstalling JS dependencies..."
+    yarn install
+
+    # 🚀 Parallel Metro in a Ghostty TAB
+    # We start this NOW so it's ready by the time the build finishes
+    echo "📡 Spawning Metro in new Ghostty tab..."
+    osascript <<EOF
+        tell application "Ghostty" to activate
+        tell application "System Events"
+            keystroke "t" using command down
+            delay 0.5
+            keystroke "cd \"$PWD\" && yarn start | tee metro.log"
+            key code 36
+        end tell
+EOF
+
+    # 📱 Native build (Mirroring Xcode GUI exactly)
+    # This bypasses the buggy RN CLI device detection
+    echo "📱 Building and installing to Biruk’s iPhone..."
+    xcodebuild \
+      -workspace ios/sezzlemobile.xcworkspace \
+      -scheme sezzlemobile \
+      -configuration Debug \
+      -destination 'id=00008150-000415810140401C' \
+      -allowProvisioningUpdates \
+      build
+
+    echo "✅ Build complete! If the app didn't auto-launch, tap the icon on your phone."
+}
+
+
+# PNPM LOCAL SETUP START
+# Seamless pnpm usage for projects with yarn/npm in production
+pnpm() {
+    # Check if we're in a project with React Native dependencies that need fixing
+    if [ -f "package.json" ] && grep -q '"react-native/@jest/create-cache-key-function"' package.json 2>/dev/null; then
+        # Create a temporary fixed package.json
+        local temp_file=$(mktemp)
+        if sed 's/"react-native\/@jest\/create-cache-key-function"/"@jest\/create-cache-key-function"/g' package.json > "$temp_file" 2>/dev/null; then
+            # Run pnpm with the fixed package.json
+            (
+                mv package.json package.json.pnpm-backup 2>/dev/null
+                mv "$temp_file" package.json 2>/dev/null
+                COREPACK_ENABLE_STRICT=0 command pnpm "$@"
+                local exit_code=$?
+                if [ -f package.json.pnpm-backup ]; then
+                    mv package.json.pnpm-backup package.json 2>/dev/null
+                fi
+                exit $exit_code
+            )
+        else
+            # If sed fails, just run pnpm normally
+            rm -f "$temp_file"
+            COREPACK_ENABLE_STRICT=0 command pnpm "$@"
+        fi
+    else
+        # Normal pnpm execution
+        COREPACK_ENABLE_STRICT=0 command pnpm "$@"
+    fi
+}
+
+# Super short aliases for common pnpm commands
+alias pi="pnpm install"
+alias pa="pnpm add"
+alias pad="pnpm add -D"
+alias pr="pnpm run"
+alias px="pnpm exec"
+alias pd="pnpm remove"
+
+# Even shorter aliases if you prefer
+alias p="pnpm"
+alias pin="pnpm install"
+
+# Special alias for hybrid install (handles private packages)
+alias pih="[ -f hybrid-install.sh ] && ./hybrid-install.sh || pnpm install"
+
+# PNPM LOCAL SETUP END
+
+
+# Bun optimization for sezzle-mobile
+source ~/WebstormProjects/sezzle-mobile/bun-aliases.sh
+
+export CONTEXT7_API_KEY="ctx7sk-c889ee40-f8ed-42a4-8b05-9f3bdbad8e97"
+
+# Add ~/.local/bin to PATH for user scripts
+export PATH="$HOME/.local/bin:$PATH"
+export GEMINI_TELEMETRY_ENABLED=0
+export GEMINI_TELEMETRY_LOG_PROMPTS=0
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+alias assistant="kiro-cli translate"
+lint() {
+  bunx eslint $(git diff --name-only --diff-filter=ACMRTUXB; git diff --name-only --cached --diff-filter=ACMRTUXB) --fix
+}
+alias typecheck="/Users/biruk.mengistu/WebstormProjects/TypeRunner/build/typescript_main"
+# Initialize zoxide and replace the 'cd' command
+eval "$(zoxide init zsh --cmd cd)"
+
+export GPR_USER=oscmob-cust
+# export GPR_API_KEY=  # Add to 1Password if needed
+
+# Starship prompt
+# eval "$(starship init zsh)"
+export PATH="/Users/biruk.mengistu/.rbenv/shims:${PATH}"
+export RBENV_SHELL=zsh
+command rbenv rehash 2>/dev/null
+rbenv() {
+  local command
+  command="${1:-}"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  rehash|shell)
+    eval "$(rbenv "sh-$command" "$@")";;
+  *)
+    command rbenv "$command" "$@";;
+  esac
+}
+
+# Claude Code LSP Tool
+export ENABLE_LSP_TOOL=1
+
+alias metrolog="cd \"/Users/biruk.mengistu/WebstormProjects/sezzle-mobile\" && yarn start | tee metro.log"

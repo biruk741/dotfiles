@@ -1,0 +1,2 @@
+# No pnpm globals currently installed
+# Add packages here as you install them

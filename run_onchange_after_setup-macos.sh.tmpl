@@ -1,0 +1,13 @@
+{{- if eq .chezmoi.os "darwin" }}
+#!/bin/bash
+set -e
+
+echo "Configuring macOS defaults..."
+
+# Example macOS defaults (customize as needed)
+# defaults write com.apple.dock autohide -bool true
+# defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# killall Dock
+
+echo "macOS configuration complete!"
+{{- end }}

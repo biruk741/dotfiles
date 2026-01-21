@@ -1,0 +1,63 @@
+.cursorrules
+node_modules
+.vscode/
+.vscode/*
+.cursor/
+.cursor/*
+*.mdc
+*.md
+.claude/
+CLAUDE.md
+# pnpm local development files
+pnpm-lock.yaml
+.pnpm-store/
+.pnpmfile.cjs
+.npmrc.local
+.npmrc.pnpm
+pnpm-debug.log*
+bun-aliases.sh
+benchmark-bun.sh
+.vscode/settings.json
+settings.json
+compare-command.sh
+
+# Personal fast validation scripts for sezzle-mobile
+scripts/fast-validate.ts
+scripts/type-errors-bun.ts
+.eslintcache
+tsconfig.tsbuildinfo
+# TypeScript
+#
+.tsbuildinfo
+
+# Validation cache (local only)
+.validation-cache.json
+.clauderc.json
+scripts/ai-*.ts
+validate-smart.ts
+test-validation.ts
+.bun/install/cache/**
+cache/**
+*~/.bun/install/cache/**
+.bun/**
+node_modules.backup/**
+local-ci/**
+some.json
+IntersectionObserver/**
+audit.log
+
+# Personal fast validation (tsgo)
+scripts/validate-fast-tsgo.ts
+tsconfig.tsgo.json
+type_errors_tsgo.txt
+biome.json
+.oxlintrc.json
+.oxlint-plugins/
+
+# Recaptcha V2 disabled files
+src/features/login/components/loginView/components/loginForm/components/innerForm/index.tsx
+src/features/login/components/loginView/components/loginForm/utils/index.ts
+src/features/signup/components/signupView/components/signupForm/components/innerForm/index.tsx
+src/features/signup/components/signupView/components/signupForm/index.tsx
+src/features/auth/components/verifyPhoneView/components/verifyPhoneForm/components/innerForm/index.tsx
+src/features/menu/components/enterPINView/index.tsx

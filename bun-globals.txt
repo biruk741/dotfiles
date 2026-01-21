@@ -1,0 +1,10 @@
+@anthropic-ai/claude-code
+@biomejs/biome
+@google/gemini-cli
+@openai/codex
+@typescript/native-preview
+@vtsls/language-server
+code-executor-mcp
+opencode-ai
+typescript
+typescript-language-server

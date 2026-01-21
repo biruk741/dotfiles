@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+echo "Installing global packages..."
+
+# Bun globals
+if command -v bun &> /dev/null; then
+    echo "Installing bun global packages..."
+    while IFS= read -r package; do
+        [[ "$package" =~ ^#.*$ || -z "$package" ]] && continue
+        echo "  Installing $package..."
+        bun add -g "$package" 2>/dev/null || echo "    Failed to install $package"
+    done < "{{ .chezmoi.sourceDir }}/bun-globals.txt"
+fi
+
+# npm globals
+if command -v npm &> /dev/null; then
+    echo "Installing npm global packages..."
+    while IFS= read -r package; do
+        [[ "$package" =~ ^#.*$ || -z "$package" ]] && continue
+        echo "  Installing $package..."
+        npm install -g "$package" 2>/dev/null || echo "    Failed to install $package"
+    done < "{{ .chezmoi.sourceDir }}/npm-globals.txt"
+fi
+
+# pnpm globals
+if command -v pnpm &> /dev/null; then
+    echo "Installing pnpm global packages..."
+    while IFS= read -r package; do
+        [[ "$package" =~ ^#.*$ || -z "$package" ]] && continue
+        echo "  Installing $package..."
+        pnpm add -g "$package" 2>/dev/null || echo "    Failed to install $package"
+    done < "{{ .chezmoi.sourceDir }}/pnpm-globals.txt"
+fi
+
+echo "Global packages installation complete!"
