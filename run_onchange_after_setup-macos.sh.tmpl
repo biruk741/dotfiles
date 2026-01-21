@@ -1,5 +1,5 @@
-{{- if eq .chezmoi.os "darwin" }}
 #!/bin/bash
+{{- if eq .chezmoi.os "darwin" }}
 set -e
 
 echo "Configuring macOS defaults..."
@@ -10,4 +10,6 @@ echo "Configuring macOS defaults..."
 # killall Dock
 
 echo "macOS configuration complete!"
+{{- else }}
+exit 0
 {{- end }}

@@ -113,7 +113,7 @@ brew "micro"
 # QUIC transport protocol implementation
 brew "mvfst"
 # Open source relational database management system
-brew "mysql@5.7"
+brew "mysql@8.0"
 # NCurses Disk Usage
 brew "ncdu"
 # Ambitious Vim-fork focused on extensibility and agility

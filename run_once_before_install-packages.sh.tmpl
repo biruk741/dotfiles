@@ -15,10 +15,12 @@ if ! command -v brew &> /dev/null; then
 fi
 
 echo "Installing Homebrew packages..."
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
+set +e
+brew bundle --no-upgrade --file="{{ .chezmoi.sourceDir }}/Brewfile" || true
 {{- if stat (joinPath .chezmoi.sourceDir "Brewfile.darwin") }}
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile.darwin"
+brew bundle --no-upgrade --file="{{ .chezmoi.sourceDir }}/Brewfile.darwin" || true
 {{- end }}
+set -e
 
 {{- else if eq .chezmoi.os "linux" }}
 # Linux: Install Homebrew if needed
@@ -29,10 +31,12 @@ if ! command -v brew &> /dev/null; then
 fi
 
 echo "Installing Homebrew packages..."
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
+set +e
+brew bundle --no-upgrade --file="{{ .chezmoi.sourceDir }}/Brewfile" || true
 {{- if stat (joinPath .chezmoi.sourceDir "Brewfile.linux") }}
-brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile.linux"
+brew bundle --no-upgrade --file="{{ .chezmoi.sourceDir }}/Brewfile.linux" || true
 {{- end }}
+set -e
 {{- end }}
 
 echo "Package installation complete!"

@@ -115,12 +115,23 @@ export COLORTERM=truecolor
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
-zplug "mafredri/zsh-async", from:github
-zplug load
+# Zinit plugin manager
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [[ -f "${ZINIT_HOME}/zinit.zsh" ]]; then
+    source "${ZINIT_HOME}/zinit.zsh"
+    zinit light mafredri/zsh-async
+fi
 
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Set HOMEBREW_PREFIX if not already set
+if [ -z "$HOMEBREW_PREFIX" ]; then
+  if [[ $(uname -m) == "arm64" ]]; then
+    export HOMEBREW_PREFIX="/opt/homebrew"
+  else
+    export HOMEBREW_PREFIX="/usr/local"
+  fi
+fi
+
+[[ -f $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 export NVM_DIR="$HOME/.nvm"
 
@@ -135,7 +146,7 @@ node() { _nvm_lazy_load; node "$@"; }
 npm() { _nvm_lazy_load; npm "$@"; }
 npx() { _nvm_lazy_load; npx "$@"; }
 
-alias mysql="/opt/homebrew/opt/mysql@5.7/bin/mysql"
+alias mysql="/opt/homebrew/opt/mysql@8.0/bin/mysql"
 alias sezzle="cd /Users/biruk.mengistu/go/src/sezzle/sezzle-compose && docker compose up -d"
 alias gchkt="$GOPATH/bin/gchkt /Users/biruk.mengistu/go/src/sezzle/lazy-checkout-gen/config"
 alias watch="../sezzle-compose/scripts/localko.sh"
@@ -147,7 +158,8 @@ export GOPRIVATE="gitlab.sezzle.com"
 
 alias rebuild="../sezzle-compose/scripts/localko_build.sh"
 alias cat="bat"
-alias rcat="cat"alias mobile-error-count="yarn type-check-limit"
+alias rcat="cat"
+alias mobile-error-count="yarn type-check-limit"
 rbenv() {
   unset -f rbenv
   eval "$(command rbenv init -)"
@@ -165,7 +177,7 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob \"!.git/*\" --glob \"!node_modules/*\""
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview \"bat -n --color=always --line-range :100 {}\""
@@ -335,7 +347,7 @@ alias pih="[ -f hybrid-install.sh ] && ./hybrid-install.sh || pnpm install"
 
 
 # Bun optimization for sezzle-mobile
-source ~/WebstormProjects/sezzle-mobile/bun-aliases.sh
+[ -f ~/WebstormProjects/sezzle-mobile/bun-aliases.sh ] && source ~/WebstormProjects/sezzle-mobile/bun-aliases.sh
 
 export CONTEXT7_API_KEY="ctx7sk-c889ee40-f8ed-42a4-8b05-9f3bdbad8e97"
 

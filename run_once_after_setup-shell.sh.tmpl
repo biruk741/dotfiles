@@ -4,9 +4,27 @@ set -e
 echo "Setting up shell environment..."
 
 # Install oh-my-zsh if not present
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
+if [ ! -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
     echo "Installing oh-my-zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# Install custom oh-my-zsh plugins
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/you-should-use" ]; then
+    echo "Installing you-should-use plugin..."
+    git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$HOME/.oh-my-zsh/custom/plugins/you-should-use"
+fi
+
+if [ ! -d "$HOME/.oh-my-zsh/custom/plugins/zsh-bat" ]; then
+    echo "Installing zsh-bat plugin..."
+    git clone https://github.com/fdellwing/zsh-bat.git "$HOME/.oh-my-zsh/custom/plugins/zsh-bat"
+fi
+
+# Install zinit if not present
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+if [ ! -f "${ZINIT_HOME}/zinit.zsh" ]; then
+    echo "Installing zinit..."
+    bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 fi
 
 # Install zsh plugins if not present
